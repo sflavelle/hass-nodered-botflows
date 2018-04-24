@@ -1,0 +1,229 @@
+[
+    {
+        "id": "1e56df49.0f9519",
+        "type": "tab",
+        "label": "HASS Bot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "eb13b67d.f80768",
+        "type": "delay",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "3",
+        "timeoutUnits": "hours",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "hour",
+        "randomFirst": "3",
+        "randomLast": "6",
+        "randomUnits": "hours",
+        "drop": true,
+        "x": 349.03594970703125,
+        "y": 175.42852783203125,
+        "wires": [
+            [
+                "3a48260c.51ff8a"
+            ]
+        ]
+    },
+    {
+        "id": "c29a03f2.76fd7",
+        "type": "twitter out",
+        "z": "1e56df49.0f9519",
+        "twitter": "",
+        "name": "Tweet",
+        "x": 990.4644165039062,
+        "y": 313.42855072021484,
+        "wires": []
+    },
+    {
+        "id": "3a48260c.51ff8a",
+        "type": "delay",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "4",
+        "nbRateUnits": "1",
+        "rateUnits": "hour",
+        "randomFirst": "98",
+        "randomLast": "110",
+        "randomUnits": "seconds",
+        "drop": true,
+        "x": 583.8056030273438,
+        "y": 255.33333587646484,
+        "wires": [
+            [
+                "6dfe4a31.8e4314"
+            ]
+        ]
+    },
+    {
+        "id": "c4349662.3814c8",
+        "type": "comment",
+        "z": "1e56df49.0f9519",
+        "name": "Traffic Control",
+        "info": "",
+        "x": 583.8056030273438,
+        "y": 215.33333587646484,
+        "wires": []
+    },
+    {
+        "id": "d1fb88f5.07752",
+        "type": "delay",
+        "z": "1e56df49.0f9519",
+        "name": "Random Delay",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "0",
+        "randomLast": "1",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 974.6986694335938,
+        "y": 256.26981353759766,
+        "wires": [
+            [
+                "c29a03f2.76fd7",
+                "26f532af.9edafe"
+            ]
+        ]
+    },
+    {
+        "id": "6dfe4a31.8e4314",
+        "type": "change",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "reset",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 776.6875610351562,
+        "y": 256.9999771118164,
+        "wires": [
+            [
+                "d1fb88f5.07752"
+            ]
+        ]
+    },
+    {
+        "id": "f57d782c.c0c9",
+        "type": "comment",
+        "z": "1e56df49.0f9519",
+        "name": "Video Media Playback",
+        "info": "",
+        "x": 332.92852783203125,
+        "y": 134.28570556640625,
+        "wires": []
+    },
+    {
+        "id": "824e5382.4fcd",
+        "type": "comment",
+        "z": "1e56df49.0f9519",
+        "name": "Bucket Things",
+        "info": "",
+        "x": 347.49993896484375,
+        "y": 220.71429443359375,
+        "wires": []
+    },
+    {
+        "id": "8baabb91.a1cb2",
+        "type": "delay",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "2",
+        "nbRateUnits": "1",
+        "rateUnits": "day",
+        "randomFirst": "6",
+        "randomLast": "48",
+        "randomUnits": "hours",
+        "drop": true,
+        "x": 391.78582763671875,
+        "y": 256.85711669921875,
+        "wires": [
+            [
+                "3a48260c.51ff8a"
+            ]
+        ]
+    },
+    {
+        "id": "26f532af.9edafe",
+        "type": "debug",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 990.2142944335938,
+        "y": 354.85713958740234,
+        "wires": []
+    },
+    {
+        "id": "76261082.ce9ac",
+        "type": "link in",
+        "z": "1e56df49.0f9519",
+        "name": "Bucket Messages",
+        "links": [
+            "1735cf2a.d20229"
+        ],
+        "x": 263.99993896484375,
+        "y": 257,
+        "wires": [
+            [
+                "8baabb91.a1cb2"
+            ]
+        ]
+    },
+    {
+        "id": "cc3a2aa4.5ad748",
+        "type": "link in",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "links": [
+            "6864c0ff.bedc3"
+        ],
+        "x": 237.5,
+        "y": 175,
+        "wires": [
+            [
+                "eb13b67d.f80768"
+            ]
+        ]
+    },
+    {
+        "id": "1f40051.bbd547b",
+        "type": "link in",
+        "z": "1e56df49.0f9519",
+        "name": "",
+        "links": [
+            "1d3d8489.c6512b"
+        ],
+        "x": 423.5,
+        "y": 313,
+        "wires": [
+            [
+                "3a48260c.51ff8a"
+            ]
+        ]
+    }
+]

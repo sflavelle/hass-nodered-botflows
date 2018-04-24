@@ -1,0 +1,179 @@
+[
+    {
+        "id": "3209db26.77e1e4",
+        "type": "tab",
+        "label": "Media -> Bot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b87c5eb8.643508",
+        "type": "switch",
+        "z": "3209db26.77e1e4",
+        "name": "Playing?",
+        "property": "data.new_state.state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "playing",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 602.642822265625,
+        "y": 105.33333587646484,
+        "wires": [
+            [
+                "55e9d730.854178"
+            ]
+        ]
+    },
+    {
+        "id": "55e9d730.854178",
+        "type": "function",
+        "z": "3209db26.77e1e4",
+        "name": "Chromecast Message",
+        "func": "var text1 = \"📺 Lily's watching \";\nvar text2 = \" \";\nvar text3 = \" on \";\nvar plexs0e0 = \"S\" + msg.data.new_state.attributes.media_season + \"E\" + msg.data.new_state.attributes.media_episode;\n\nmsg.payload = text1 + msg.data.new_state.attributes.media_series_title + text2 + plexs0e0 + text3 + msg.data.new_state.attributes.app_name + \"!\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 787.4999084472656,
+        "y": 105.6190414428711,
+        "wires": [
+            [
+                "6864c0ff.bedc3"
+            ]
+        ],
+        "icon": "node-red/comment.png"
+    },
+    {
+        "id": "f82ad035.6daa18",
+        "type": "deduplicate",
+        "z": "3209db26.77e1e4",
+        "name": "",
+        "keyproperty": "payload.data.new_state.attributes.media_content_id",
+        "expiry": "60",
+        "x": 411.1428527832031,
+        "y": 118.90477752685547,
+        "wires": [
+            [
+                "b87c5eb8.643508"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fc695031.881f2",
+        "type": "server-state-changed",
+        "z": "3209db26.77e1e4",
+        "name": "My Chromecast Events",
+        "server": "668a9dfa.d6421c",
+        "entityidfilter": "media_player.chromecast_simon",
+        "entityidfiltertype": "exact",
+        "haltifstate": "",
+        "x": 163.67852783203125,
+        "y": 112.47620391845703,
+        "wires": [
+            [
+                "f82ad035.6daa18"
+            ]
+        ]
+    },
+    {
+        "id": "e138425c.bb66e8",
+        "type": "server-state-changed",
+        "z": "3209db26.77e1e4",
+        "name": "Apple TV",
+        "server": "668a9dfa.d6421c",
+        "entityidfilter": "media_player.apple_tv",
+        "entityidfiltertype": "exact",
+        "haltifstate": "Nothing playing",
+        "x": 131,
+        "y": 167.47621154785156,
+        "wires": [
+            [
+                "7a4b05e4.cca0fc"
+            ]
+        ]
+    },
+    {
+        "id": "ba2b549.745f0a8",
+        "type": "switch",
+        "z": "3209db26.77e1e4",
+        "name": "Playing?",
+        "property": "data.new_state.state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "playing",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 511.83331298828125,
+        "y": 158.80955505371094,
+        "wires": [
+            [
+                "e9444941.9c8a68"
+            ]
+        ]
+    },
+    {
+        "id": "e9444941.9c8a68",
+        "type": "function",
+        "z": "3209db26.77e1e4",
+        "name": "ATV Message",
+        "func": "var text1 = \"📺 Someone's watching \";\nvar text2 = \" \";\nvar text3 = \" on the lounge Apple TV!\";\nvar plexs0e0 = \"S\" + msg.data.new_state.attributes.media_season + \"E\" + msg.data.new_state.attributes.media_episode;\n\nmsg.payload = text1 + msg.data.new_state.attributes.media_series_title + text2 + plexs0e0 + text3;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 676.6903991699219,
+        "y": 159.0952606201172,
+        "wires": [
+            [
+                "6864c0ff.bedc3"
+            ]
+        ],
+        "icon": "node-red/comment.png"
+    },
+    {
+        "id": "7a4b05e4.cca0fc",
+        "type": "deduplicate",
+        "z": "3209db26.77e1e4",
+        "name": "",
+        "keyproperty": "payload.data.new_state.attributes.media_content_id",
+        "expiry": "60",
+        "x": 320.3333435058594,
+        "y": 172.38099670410156,
+        "wires": [
+            [
+                "ba2b549.745f0a8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6864c0ff.bedc3",
+        "type": "link out",
+        "z": "3209db26.77e1e4",
+        "name": "Media Playback Messages",
+        "links": [
+            "cc3a2aa4.5ad748"
+        ],
+        "x": 1002.4999542236328,
+        "y": 139.3333282470703,
+        "wires": []
+    },
+    {
+        "id": "668a9dfa.d6421c",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "url": "",
+        "pass": ""
+    }
+]

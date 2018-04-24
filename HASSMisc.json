@@ -1,0 +1,194 @@
+[
+    {
+        "id": "b4e717eb.c63cf",
+        "type": "tab",
+        "label": "Hass Misc -> Bot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d6fd831d.75f848",
+        "type": "server-state-changed",
+        "z": "b4e717eb.c63cf",
+        "name": "Where's Simon?",
+        "server": "668a9dfa.d6421c",
+        "entityidfilter": "input_select.simon_presence",
+        "entityidfiltertype": "exact",
+        "haltifstate": "",
+        "x": 172.3333282470703,
+        "y": 181.33334350585938,
+        "wires": [
+            [
+                "41961e1b.ea3118"
+            ]
+        ]
+    },
+    {
+        "id": "41961e1b.ea3118",
+        "type": "switch",
+        "z": "b4e717eb.c63cf",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "At Home",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "At Work",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "In Bed",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 334.33331298828125,
+        "y": 181.33334350585938,
+        "wires": [
+            [],
+            [
+                "f32809a7.5dd98"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "21a23435.8d64b4",
+        "type": "comment",
+        "z": "b4e717eb.c63cf",
+        "name": "Comments on Simon's Whereabouts",
+        "info": "",
+        "x": 224.5,
+        "y": 116,
+        "wires": []
+    },
+    {
+        "id": "f32809a7.5dd98",
+        "type": "function",
+        "z": "b4e717eb.c63cf",
+        "name": "Work Msg",
+        "func": "var d = new Date();\nvar n = d.toLocaleTimeString()\n\nmsg.payload = msg.payload.toString();\nvar text1 = \"@FluffyFallow made it to work. It's \";\nvar text2 = \". Pray for them.\";\nmsg.payload = text1 + n + text2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 555.3333129882812,
+        "y": 182.33334350585938,
+        "wires": [
+            [
+                "b0288974.2bef48",
+                "1d3d8489.c6512b"
+            ]
+        ],
+        "icon": "node-red/comment.png"
+    },
+    {
+        "id": "1d3d8489.c6512b",
+        "type": "link out",
+        "z": "b4e717eb.c63cf",
+        "name": "",
+        "links": [
+            "1f40051.bbd547b"
+        ],
+        "x": 1033.5,
+        "y": 145.33334350585938,
+        "wires": []
+    },
+    {
+        "id": "7badcb4.6002d34",
+        "type": "debug",
+        "z": "b4e717eb.c63cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 742.5000152587891,
+        "y": 117,
+        "wires": []
+    },
+    {
+        "id": "b0288974.2bef48",
+        "type": "debug",
+        "z": "b4e717eb.c63cf",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 913.4999542236328,
+        "y": 182,
+        "wires": []
+    },
+    {
+        "id": "5ce5f6ab.c7e548",
+        "type": "link in",
+        "z": "b4e717eb.c63cf",
+        "name": "",
+        "links": [
+            "9c411b31.6e7618"
+        ],
+        "x": 172.50001525878906,
+        "y": 284,
+        "wires": [
+            [
+                "576cca68.93d454"
+            ]
+        ]
+    },
+    {
+        "id": "fdf4b0b0.fb58f8",
+        "type": "comment",
+        "z": "b4e717eb.c63cf",
+        "name": "When a GH alarm goes off (I'm awoken...)",
+        "info": "",
+        "x": 253.5,
+        "y": 333,
+        "wires": []
+    },
+    {
+        "id": "576cca68.93d454",
+        "type": "time-range-switch",
+        "z": "b4e717eb.c63cf",
+        "name": "Is this a sane time?",
+        "lat": "",
+        "lon": "",
+        "startTime": "02:30",
+        "endTime": "solarNoon",
+        "startOffset": 0,
+        "endOffset": 0,
+        "x": 304.5,
+        "y": 284.6666259765625,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "197d78a3.cf4747",
+        "type": "comment",
+        "z": "b4e717eb.c63cf",
+        "name": "Grab weather here",
+        "info": "",
+        "x": 506.5,
+        "y": 223,
+        "wires": [],
+        "icon": "node-red/alert.png"
+    },
+    {
+        "id": "668a9dfa.d6421c",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "url": "",
+        "pass": ""
+    }
+]

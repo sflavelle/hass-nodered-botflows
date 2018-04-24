@@ -1,0 +1,211 @@
+[
+    {
+        "id": "bc84d74b.d9027",
+        "type": "tab",
+        "label": "Bucket -> Bot",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "befe847d.4b8ea8",
+        "type": "file in",
+        "z": "bc84d74b.d9027",
+        "name": "Read the file",
+        "filename": "/opt/docker-cfg/bucket/Red-DiscordBot/data/serverquotes/quotes.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 340.0713806152344,
+        "y": 283,
+        "wires": [
+            [
+                "5a51d1c8.a5c4b"
+            ]
+        ]
+    },
+    {
+        "id": "5a51d1c8.a5c4b",
+        "type": "json",
+        "z": "bc84d74b.d9027",
+        "name": "Convert to JSON object",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 561.0713806152344,
+        "y": 284,
+        "wires": [
+            [
+                "5a8a4d5e.080514"
+            ]
+        ]
+    },
+    {
+        "id": "5a8a4d5e.080514",
+        "type": "function",
+        "z": "bc84d74b.d9027",
+        "name": "Get a random quote",
+        "func": "var length = msg.payload[\"124680630075260928\"].length-1\nvar quotes = msg.payload[\"124680630075260928\"].length\nvar randquote = msg.payload[\"124680630075260928\"][Math.floor(Math.random()*quotes)]\n\nmsg.payload = \"🤖 Here's a random quote from my Tedbeet bot!\\n\\n\" + '\"' + decodeURI(randquote.text) + '\"\\n—' + randquote.author_name;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 815.642822265625,
+        "y": 282.4285583496094,
+        "wires": [
+            [
+                "1735cf2a.d20229"
+            ]
+        ],
+        "icon": "node-red/comment.png"
+    },
+    {
+        "id": "d2645caf.601d38",
+        "type": "inject",
+        "z": "bc84d74b.d9027",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "10800",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 120.8214111328125,
+        "y": 158.00003051757812,
+        "wires": [
+            [
+                "84285ae7.1a4a78"
+            ]
+        ]
+    },
+    {
+        "id": "84285ae7.1a4a78",
+        "type": "random",
+        "z": "bc84d74b.d9027",
+        "name": "",
+        "low": "1",
+        "high": "2",
+        "inte": "true",
+        "property": "payload",
+        "x": 111.85714721679688,
+        "y": 201.42861938476562,
+        "wires": [
+            [
+                "77bb6d7.009d894"
+            ]
+        ]
+    },
+    {
+        "id": "77bb6d7.009d894",
+        "type": "switch",
+        "z": "bc84d74b.d9027",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 141,
+        "y": 300.14288330078125,
+        "wires": [
+            [
+                "befe847d.4b8ea8"
+            ],
+            [
+                "f0b25495.1ad6a8"
+            ]
+        ]
+    },
+    {
+        "id": "f0b25495.1ad6a8",
+        "type": "file in",
+        "z": "bc84d74b.d9027",
+        "name": "Read the file",
+        "filename": "/opt/docker-cfg/bucket/Red-DiscordBot/data/trigger/triggers.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "x": 338.0714111328125,
+        "y": 316.0000305175781,
+        "wires": [
+            [
+                "81699c96.35941"
+            ]
+        ]
+    },
+    {
+        "id": "81699c96.35941",
+        "type": "json",
+        "z": "bc84d74b.d9027",
+        "name": "Convert to JSON object",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 559.0714111328125,
+        "y": 317.0000305175781,
+        "wires": [
+            [
+                "4708cba7.6ffa6c"
+            ]
+        ]
+    },
+    {
+        "id": "4708cba7.6ffa6c",
+        "type": "function",
+        "z": "bc84d74b.d9027",
+        "name": "Get a random Bucket Fact",
+        "func": "var max = msg.payload[0].responses.length;\nvar rand = msg.payload[0].responses[Math.floor(Math.random()*max)];\n\nmsg.payload = \"🤖 Here's a random Bucket Fact from my Tedbeet bot:\\n\" + decodeURI(rand)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 826.6428833007812,
+        "y": 315.4285888671875,
+        "wires": [
+            [
+                "1735cf2a.d20229"
+            ]
+        ],
+        "icon": "node-red/comment.png"
+    },
+    {
+        "id": "1735cf2a.d20229",
+        "type": "link out",
+        "z": "bc84d74b.d9027",
+        "name": "HASS Bot",
+        "links": [
+            "76261082.ce9ac"
+        ],
+        "x": 1128,
+        "y": 293,
+        "wires": []
+    },
+    {
+        "id": "1bf46ee1.c73819",
+        "type": "inject",
+        "z": "bc84d74b.d9027",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 342,
+        "wires": [
+            [
+                "f0b25495.1ad6a8"
+            ]
+        ]
+    }
+]
